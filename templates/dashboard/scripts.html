@@ -22,7 +22,13 @@ const survivedByClass = {{survived_by_class}}
 const diedByClass = {{died_by_class}}
 
 const ports = {{ports|safe}}
+
 const embarkedData = {{embarked_by_class|safe}}
+const ordinalSuffix = {
+  1: 'st',
+  2: 'nd',
+  3: 'rd'
+};
 
 // Charts
 new Chart('chart-class-donut', {
@@ -102,7 +108,7 @@ new Chart('chart-embarked-class', {
   data: {
     labels: ['Southampton', 'Queenstown', 'Cherbourg'],
     datasets: classes.map((c, i) => ({
-      label: `${c}st Class`,
+      label: `${c}${ordinalSuffix[c] || 'th'} Class`,
       data: ports.map((_, p) => embarkedData[p][i]),
       backgroundColor: ['#67817D', '#C5C9B5', '#85B0A2'][i]
     }))
@@ -127,6 +133,7 @@ new Chart('chart-embarked-class', {
       }
     }
   }
+  
 })
 
 </script>
